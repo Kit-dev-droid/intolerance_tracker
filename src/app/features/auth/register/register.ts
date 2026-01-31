@@ -1,13 +1,12 @@
-import { Component, inject  } from '@angular/core';
-import {FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import {Message} from 'primeng/message';
-import {InputText} from 'primeng/inputtext';
-import { ToastModule } from 'primeng/toast';
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { InputText, InputTextModule } from 'primeng/inputtext';
+import { Message } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
-import {Auth} from '../../../core/services/auth';
+import { ToastModule } from 'primeng/toast';
+import { Auth } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +15,9 @@ import {Auth} from '../../../core/services/auth';
     Message,
     InputText,
     ToastModule,
-    ButtonModule,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    ButtonModule,
   ],
   providers: [MessageService],
   templateUrl: './register.html',
@@ -44,7 +43,7 @@ export class Register {
             severity: 'success',
             summary: 'Success',
             detail: 'Registration successful!',
-            life: 3000
+            life: 3000,
           });
           this.registerForm.reset();
           this.formSubmitted = false;
@@ -55,11 +54,10 @@ export class Register {
             severity: 'error',
             summary: 'Error',
             detail: error.error?.message || 'Registration failed',
-            life: 3000
+            life: 3000,
           });
-        }
+        },
       });
-
     }
   }
 
@@ -70,11 +68,11 @@ export class Register {
 
   constructor(private authService: Auth) {
     this.registerForm = this.fb.group({
-      userName: ['',[Validators.required]],
-      email: ['',[Validators.required, Validators.email]],
-      number: ['',[Validators.required, Validators.minLength(5)]],
-      password: ['',[Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['',[Validators.required]]
+      userName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      number: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 }

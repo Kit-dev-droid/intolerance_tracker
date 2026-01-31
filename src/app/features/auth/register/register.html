@@ -1,93 +1,144 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
-<div class="min-h-screen flex items-center justify-center">
-  <div class="w-full max-w-md rounded-2xl border border-gray-300 bg-white p-8">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md rounded-2xl border border-gray-300 bg-white p-8">
+      <h1 class="text-center text-2xl mb-8 font-medium text-gray-900">Create Account</h1>
 
-    <h1 class="text-center text-2xl mb-8 font-medium text-gray-900">
-      Create Account
-    </h1>
+      <!-- Username -->
+      <div class="mb-5">
+        <label class="block mb-1 text-sm text-gray-700">userName</label>
+        <input
+          pInputText
+          type="userName"
+          id="userName"
+          formControlName="userName"
+          class="w-full"
+          [invalid]="isInvalid('userName')"
+        />
+        @if (isInvalid('userName')) {
+          @if (registerForm.get('userName')?.errors?.['required']) {
+            <p-message severity="error" size="small" variant="simple"
+              >userName is required.</p-message
+            >
+          }
+          @if (registerForm.get('userName')?.errors?.['email']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Please enter a valid userName.</p-message
+            >
+          }
+        }
+      </div>
 
-    <!-- Username -->
-    <div class="mb-5">
-      <label class="block mb-1 text-sm text-gray-700">userName</label>
-      <input pInputText type="userName" id="userName"  formControlName="userName" class="w-full" [invalid]="isInvalid('userName')" />
-      @if (isInvalid('userName')) {
-        @if (registerForm.get('userName')?.errors?.['required']) {
-          <p-message severity="error" size="small" variant="simple">userName is required.</p-message>
+      <!-- Email -->
+      <div class="mb-5">
+        <label class="block mb-1 text-sm text-gray-700">Email</label>
+        <input
+          pInputText
+          type="email"
+          id="email"
+          formControlName="email"
+          class="w-full"
+          [invalid]="isInvalid('email')"
+        />
+        @if (isInvalid('email')) {
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Please enter a valid email.</p-message
+            >
+          }
         }
-        @if (registerForm.get('userName')?.errors?.['email']) {
-          <p-message severity="error" size="small" variant="simple">Please enter a valid userName.</p-message>
+      </div>
+
+      <!-- Number -->
+      <div class="mb-5">
+        <label class="block mb-1 text-sm text-gray-700">Contact Number</label>
+        <input
+          pInputText
+          type="text"
+          id="number"
+          formControlName="number"
+          class="w-full"
+          [invalid]="isInvalid('number')"
+        />
+        @if (isInvalid('number')) {
+          @if (registerForm.get('number')?.errors?.['required']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Contact Number is required.</p-message
+            >
+          }
+          @if (registerForm.get('number')?.errors?.['number']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Please enter a valid contact number.</p-message
+            >
+          }
         }
-      }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-5">
+        <label class="block mb-1 text-sm text-gray-700">Password</label>
+        <p-password
+          type="password"
+          id="password"
+          [toggleMask]="true"
+          formControlName="password"
+          class="w-full"
+          inputStyleClass="w-full"
+          [invalid]="isInvalid('password')"
+        />
+        @if (isInvalid('password')) {
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <p-message severity="error" size="small" variant="simple"
+              >password is required.</p-message
+            >
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Password must be at least 8 characters.</p-message
+            >
+          }
+        }
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-8">
+        <label class="block mb-1 text-sm text-gray-700">Confirm Password</label>
+        <p-password
+          type="password"
+          id="confirmPassword"
+          [toggleMask]="true"
+          formControlName="confirmPassword"
+          class="w-full"
+          inputStyleClass="w-full"
+          [invalid]="isInvalid('confirmPassword')"
+        />
+        @if (isInvalid('confirmPassword')) {
+          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Please Confirm Password.</p-message
+            >
+          }
+          @if (registerForm.get('confirmPassword')?.errors?.['confirmPassword']) {
+            <p-message severity="error" size="small" variant="simple"
+              >Passwords do not match.</p-message
+            >
+          }
+        }
+      </div>
+
+      <!-- Button -->
+      <div class="flex justify-end">
+        <button
+          pButton
+          [unstyled]="true"
+          type="submit"
+          class="rounded-md border border-gray-400 px-6 py-2 text-gray-800 hover:bg-gray-900 hover:text-white transition"
+        >
+          Submit
+        </button>
+      </div>
     </div>
-
-    <!-- Email -->
-    <div class="mb-5">
-      <label class="block mb-1 text-sm text-gray-700">Email</label>
-      <input pInputText type="email" id="email"  formControlName="email" class="w-full" [invalid]="isInvalid('email')" />
-      @if (isInvalid('email')) {
-        @if (registerForm.get('email')?.errors?.['required']) {
-          <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
-        }
-        @if (registerForm.get('email')?.errors?.['email']) {
-          <p-message severity="error" size="small" variant="simple">Please enter a valid email.</p-message>
-        }
-      }
-    </div>
-
-    <!-- Number -->
-    <div class="mb-5">
-      <label class="block mb-1 text-sm text-gray-700">Contact Number</label>
-      <input pInputText type="text" id="number"  formControlName="number" class="w-full" [invalid]="isInvalid('number')" />
-      @if (isInvalid('number')) {
-        @if (registerForm.get('number')?.errors?.['required']) {
-          <p-message severity="error" size="small" variant="simple">Contact Number is required.</p-message>
-        }
-        @if (registerForm.get('number')?.errors?.['number']) {
-          <p-message severity="error" size="small" variant="simple">Please enter a valid contact number.</p-message>
-        }
-      }
-    </div>
-
-    <!-- Password -->
-    <div class="mb-5">
-      <label class="block mb-1 text-sm text-gray-700">Password</label>
-      <p-password type="password" id="password" [toggleMask]="true"  formControlName="password" class="w-full" inputStyleClass="w-full" [invalid]="isInvalid('password')" />
-      @if (isInvalid('password')) {
-        @if (registerForm.get('password')?.errors?.['required']) {
-          <p-message severity="error" size="small" variant="simple">password is required.</p-message>
-        }
-        @if (registerForm.get('password')?.errors?.['minlength']) {
-          <p-message severity="error" size="small" variant="simple">Password must be at least 8 characters.</p-message>
-        }
-      }
-    </div>
-
-    <!-- Confirm Password -->
-    <div class="mb-8">
-      <label class="block mb-1 text-sm text-gray-700">Confirm Password</label>
-      <p-password type="password" id="confirmPassword" [toggleMask]="true"  formControlName="confirmPassword" class="w-full" inputStyleClass="w-full" [invalid]="isInvalid('confirmPassword')" />
-      @if (isInvalid('confirmPassword')) {
-        @if (registerForm.get('confirmPassword')?.errors?.['required']) {
-          <p-message severity="error" size="small" variant="simple">Please Confirm Password.</p-message>
-        }
-        @if (registerForm.get('confirmPassword')?.errors?.['confirmPassword']) {
-          <p-message severity="error" size="small" variant="simple">Passwords do not match.</p-message>
-        }
-      }
-    </div>
-
-    <!-- Button -->
-    <div class="flex justify-end">
-      <button
-        pButton
-        [unstyled]="true"
-        type="submit"
-        class="rounded-md border border-gray-400 px-6 py-2 text-gray-800 hover:bg-gray-900 hover:text-white transition"
-      >
-        Submit
-      </button>
-    </div>
-
   </div>
-</div>
 </form>
